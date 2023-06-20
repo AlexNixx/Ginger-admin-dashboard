@@ -1,5 +1,9 @@
+import "./styles/index.scss";
+
+import { Routing } from "./routes";
+
 const App = () => {
-	return <div>Set up project</div>;
+	return <Routing />;
 };
 
 export default App;
