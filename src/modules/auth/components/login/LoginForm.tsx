@@ -1,9 +1,17 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
+import { login } from "modules/auth/services/authServices";
 
 export const LoginForm = () => {
-	const onFinish = (values: any) => {
-		console.log("Received values of form: ", values);
+	const onFinish = async (values: any) => {
+		try {
+			console.log("Received values of form: ", values);
+			const { email, password } = values;
+			const response = await login(email, password);
+			console.log("Response:", response);
+		} catch (error) {
+			console.error("An error occurred:", error);
+		}
 	};
 
 	return (
@@ -14,7 +22,7 @@ export const LoginForm = () => {
 			autoComplete="off"
 		>
 			<Form.Item
-				name="username"
+				name="email"
 				rules={[{ required: true, message: "Please input your username!" }]}
 			>
 				<Input prefix={<UserOutlined />} placeholder="Username" />
