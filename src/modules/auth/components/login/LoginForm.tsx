@@ -1,19 +1,18 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "modules/auth/services/authServices";
+import { FC } from "react";
 
-export const LoginForm = () => {
-	const onFinish = async (values: any) => {
-		try {
-			console.log("Received values of form: ", values);
-			const { email, password } = values;
-			const response = await login(email, password);
-			console.log("Response:", response);
-		} catch (error) {
-			console.error("An error occurred:", error);
-		}
-	};
+export type LoginFormValues = {
+	email: string;
+	password: string;
+};
 
+interface LoginFormProps {
+	onFinish: (loginData: LoginFormValues) => void;
+}
+
+export const LoginForm: FC<LoginFormProps> = ({ onFinish }) => {
 	return (
 		<Form
 			name="basic"
