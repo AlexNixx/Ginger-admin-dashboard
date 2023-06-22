@@ -7,8 +7,9 @@ import { LoginPage } from "modules/auth";
 export const Routing = () => {
 	return (
 		<Routes>
+			<Route path={"/login"} element={<LoginPage />} />
 			<Route element={<Layout />}>
-				<Route path={"/"} element={<LoginPage />} />
+				<Route path={"/"} element={<Test />} />
 				<Route path={"/products"} element={<Test />} />
 				<Route path={"/categories"} element={<Test />} />
 				<Route path={"/brands"} element={<Test />} />
