@@ -8,6 +8,7 @@ import logoCollapsed from "shared/assets/image/logo-collapsed.svg";
 
 import cls from "./Sidebar.module.scss";
 import { useLocation } from "react-router-dom";
+import { LanguageSwitcher } from "modules/session";
 
 export const Sidebar = () => {
 	const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -39,6 +40,7 @@ export const Sidebar = () => {
 				mode="inline"
 				items={menuItems}
 			/>
+			<LanguageSwitcher />
 		</Layout.Sider>
 	);
 };
