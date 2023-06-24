@@ -2,13 +2,16 @@ import { Row, Col } from "antd";
 import { LoginForm, LoginFormValues } from "./LoginForm";
 import { login } from "modules/auth/services/authServices";
 
+import { AxiosError } from "axios";
+
 export const LoginAction = () => {
 	const onFinish = async (loginData: LoginFormValues) => {
 		try {
 			const { email, password } = loginData;
 			const response = await login(email, password);
 		} catch (error) {
-			console.error("An error occurred:", error);
+			const err = error as AxiosError;
+			console.log(err.response?.data);
 		}
 	};
 
