@@ -2,7 +2,7 @@ import { $api } from "shared/api/api"
 import { AxiosResponse } from "axios"
 import { AuthResponse } from "../models/AuthResponse"
 
-export async function login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+export const login = async (email: string, password: string): Promise<AxiosResponse<AuthResponse>> => {
     return $api.post("/user/signin", { email, password });
 }
 

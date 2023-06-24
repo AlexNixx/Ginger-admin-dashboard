@@ -25,7 +25,7 @@ $api.interceptors.response.use((response) => {
     if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         const access_token = await refreshAccessToken();
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+        localStorage.setItem(USER_LOCALSTORAGE_KEY, access_token.data.accessToken)
         return $api(originalRequest);
     }
     return Promise.reject(error);
