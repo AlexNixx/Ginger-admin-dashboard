@@ -1,7 +1,9 @@
+import { FC } from "react";
+
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
-import { login } from "modules/auth/services/authServices";
-import { FC } from "react";
+
+import { useTranslation } from "react-i18next";
 
 export type LoginFormValues = {
 	email: string;
@@ -13,6 +15,8 @@ interface LoginFormProps {
 }
 
 export const LoginForm: FC<LoginFormProps> = ({ onFinish }) => {
+	const { t } = useTranslation("login");
+
 	return (
 		<Form
 			name="basic"
@@ -40,7 +44,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onFinish }) => {
 
 			<Form.Item>
 				<Button type="primary" htmlType="submit">
-					Submit
+					{t("login")}
 				</Button>
 			</Form.Item>
 		</Form>
