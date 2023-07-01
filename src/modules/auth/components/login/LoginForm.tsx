@@ -26,20 +26,26 @@ export const LoginForm: FC<LoginFormProps> = ({ onFinish }) => {
 		>
 			<Form.Item
 				name="email"
-				rules={[{ required: true, message: "Please input your username!" }]}
+				rules={[
+					{
+						required: true,
+						message: `${t("required.email")}`,
+						type: "email",
+					},
+				]}
 			>
-				<Input prefix={<UserOutlined />} placeholder="Username" />
+				<Input prefix={<UserOutlined />} placeholder={t("email")} />
 			</Form.Item>
 
 			<Form.Item
 				name="password"
-				rules={[{ required: true, message: "Please input your password!" }]}
+				rules={[{ required: true, message: `${t("required.password")}` }]}
 			>
-				<Input.Password prefix={<LockOutlined />} placeholder="Password" />
+				<Input.Password prefix={<LockOutlined />} placeholder={t("password")} />
 			</Form.Item>
 
 			<Form.Item name="remember" valuePropName="checked">
-				<Checkbox>Remember me</Checkbox>
+				<Checkbox>{t("remember")}</Checkbox>
 			</Form.Item>
 
 			<Form.Item>
