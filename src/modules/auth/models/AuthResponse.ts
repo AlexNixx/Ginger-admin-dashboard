@@ -1,4 +1,8 @@
-interface User {
+export interface ErrorResponse {
+    message: string;
+}
+
+export interface User {
     name: string,
     surname: string,
     email: string,
@@ -14,3 +18,14 @@ export interface AuthResponse {
     user: User
 
 }
+
+export interface AuthState {
+    user: User | null,
+    isSuccess: boolean,
+    isLoading: boolean,
+    isError: boolean,
+    error: string,
+    setUser: (user: User) => void
+    login: (email: string, password: string) => Promise<void>;
+}
+
