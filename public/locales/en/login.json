@@ -1,3 +1,8 @@
 {
-	"login": "Sign In"
+	"login": "Sign In",
+	"remember": "Remember me",
+	"email": "Email",
+	"password": "Password",
+	"required.email": "Please input your email!",
+	"required.password": "Please input your password!"
 }
