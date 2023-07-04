@@ -21,11 +21,14 @@ export interface AuthResponse {
 
 export interface AuthState {
     user: User | null,
+    accessToken: string,
     isSuccess: boolean,
     isLoading: boolean,
     isError: boolean,
     error: string,
     setUser: (user: User) => void
-    login: (email: string, password: string) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>
+    logout: () => Promise<void>
+    refresh: () => Promise<void>
 }
 
