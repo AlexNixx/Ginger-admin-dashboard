@@ -7,6 +7,7 @@ import { useAuthStore } from "modules/auth/models/useAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
+import { Loader } from "shared/ui/fullscreen-loader";
 
 export const LoginAction = () => {
 	const { login, isSuccess, isLoading, isError, error } = useAuthStore();
@@ -31,11 +32,7 @@ export const LoginAction = () => {
 	}, [isSuccess]);
 
 	if (isLoading) {
-		return (
-			<Row justify={"center"} align={"middle"} style={{ height: "100vh" }}>
-				<Spin size="large" />
-			</Row>
-		);
+		return <Loader />;
 	}
 
 	return (
