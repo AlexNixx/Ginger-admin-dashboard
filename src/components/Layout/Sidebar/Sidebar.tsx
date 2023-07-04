@@ -8,6 +8,7 @@ import cls from "./Sidebar.module.scss";
 
 import { LanguageSwitcher } from "modules/session";
 import { SidebarMenu } from "./SidebarMenu";
+import { Logout } from "modules/auth";
 
 export const Sidebar = () => {
 	const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -31,7 +32,8 @@ export const Sidebar = () => {
 
 			<SidebarMenu />
 
-			<LanguageSwitcher short={collapsed} className={cls.lang} />
+			<Logout short={collapsed} className={cls.logout} />
+			{/* <LanguageSwitcher short={collapsed} />  */}
 		</Layout.Sider>
 	);
 };

@@ -1,11 +1,7 @@
 import { LoginAction } from "../components/login/LoginAction";
 
 const Login = () => {
-	return (
-		<div>
-			<LoginAction />
-		</div>
-	);
+	return <LoginAction />;
 };
 
 export default Login;

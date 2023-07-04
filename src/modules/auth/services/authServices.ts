@@ -10,7 +10,6 @@ export const logout = async (): Promise<AxiosResponse> => {
     return $api.post("/user/logout");
 }
 
-
 export const refreshAccessToken = async (): Promise<AxiosResponse<AuthResponse>> => {
     return $api.get("/user/refresh")
 }

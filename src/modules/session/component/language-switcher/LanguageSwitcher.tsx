@@ -1,15 +1,12 @@
-import { Dropdown, Space } from "antd";
+import { Dropdown } from "antd";
 
 import { useTranslation } from "react-i18next";
-
-import { LangIcon } from "./icon";
 
 import type { MenuProps } from "antd";
 
 import { FC } from "react";
 
 interface LanguageSwitcherProps {
-	short?: boolean;
 	className?: string;
 }
 
@@ -24,10 +21,7 @@ const items: MenuProps["items"] = [
 	},
 ];
 
-export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
-	short = false,
-	className,
-}) => {
+export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
 	const { t, i18n } = useTranslation();
 
 	const onClick: MenuProps["onClick"] = ({ key }) => {
@@ -37,10 +31,7 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
 	return (
 		<Dropdown menu={{ items, onClick }} className={className}>
 			<a onClick={(e) => e.preventDefault()} href="">
-				<Space style={{ color: "#e1d8d8" }}>
-					<LangIcon />
-					{t(short ? "short-language" : "language")}
-				</Space>
+				{t("language")}
 			</a>
 		</Dropdown>
 	);

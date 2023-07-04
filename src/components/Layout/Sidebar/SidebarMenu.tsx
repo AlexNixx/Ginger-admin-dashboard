@@ -8,11 +8,15 @@ import {
 	AppleOutlined,
 	TeamOutlined,
 	ShoppingCartOutlined,
+	RollbackOutlined,
 } from "@ant-design/icons";
 
 import { Link, useLocation } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "modules/session";
+import { LangIcon } from "modules/session/component/language-switcher/icon";
+import { Logout } from "modules/auth";
 
 export type MenuItem = Required<MenuProps>["items"][number] & {
 	label: JSX.Element;
@@ -54,6 +58,16 @@ export const SidebarMenu = () => {
 			icon: <TeamOutlined />,
 			label: <Link to="/users">{t("users")}</Link>,
 		},
+		// {
+		// 	key: "7",
+		// 	icon: <LangIcon />,
+		// 	label: <LanguageSwitcher />,
+		// },
+		// {
+		// 	key: "8",
+		// 	icon: <RollbackOutlined />,
+		// 	label: <Logout />,
+		// },
 	];
 
 	const defaultSelectedKeys = menuItems.find(
