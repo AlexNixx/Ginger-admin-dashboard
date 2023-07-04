@@ -1,10 +1,14 @@
 import { useAuthStore } from "modules/auth/models/useAuth";
+import { useEffect } from "react";
+
 import { Navigate, Outlet } from "react-router-dom";
 
 export const GuardRoute = () => {
-	const user = useAuthStore((state) => state.user);
+	const { user, isSuccess } = useAuthStore();
 
-	if (user?.role === "ADMIN") return <Outlet />;
+	if (isSuccess && user?.role === "ADMIN") {
+		return <Outlet />;
+	}
 
 	return <Navigate to={"/login"} />;
 };
