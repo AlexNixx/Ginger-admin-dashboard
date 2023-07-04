@@ -1,13 +1,16 @@
-import "./styles/index.scss";
-
 import { Routing } from "./routes";
 import { WithToaster } from "./hoc/withToaster";
+import { InitAuth } from "./hoc/initAuth";
+
+import "./styles/index.scss";
 
 const App = () => {
 	return (
-		<WithToaster>
-			<Routing />
-		</WithToaster>
+		<InitAuth>
+			<WithToaster>
+				<Routing />
+			</WithToaster>
+		</InitAuth>
 	);
 };
 
