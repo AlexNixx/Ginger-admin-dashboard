@@ -1,0 +1,1 @@
+export { ProductPageAsync as ProductPage } from "./page/Product.page.async"
