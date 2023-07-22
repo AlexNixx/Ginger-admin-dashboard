@@ -1,26 +1,24 @@
 import { RollbackOutlined } from "@ant-design/icons";
 import { FC } from "react";
 
-import { Typography } from "antd";
+import { Button } from "antd";
 import { useAuthStore } from "modules/auth/models/useAuth";
 
 interface LogoutProps {
-	short?: boolean;
 	className?: string;
 }
 
-export const Logout: FC<LogoutProps> = ({ short, className }) => {
+export const Logout: FC<LogoutProps> = ({ className }) => {
 	const logout = useAuthStore((state) => state.logout);
 
 	const handleLogout = async () => {
-		const result = await logout();
-		console.log(result);
+		await logout();
 	};
 
 	return (
-		<Typography.Link className={className} onClick={handleLogout}>
+		<Button type="primary" className={className} onClick={handleLogout}>
+			Logout
 			<RollbackOutlined style={{ color: "white" }} />
-			{!short && <p>Logout</p>}
-		</Typography.Link>
+		</Button>
 	);
 };

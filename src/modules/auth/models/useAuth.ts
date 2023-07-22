@@ -35,6 +35,8 @@ export const useAuthStore = create<AuthState>()(devtools(((set) => ({
         } catch (error) {
             const err = error as AxiosError<ErrorResponse>;
             const message = err?.response?.data.message
+
+            console.log(message)
             set((state) => ({
                 isLoading: false,
                 isError: true,
@@ -53,6 +55,7 @@ export const useAuthStore = create<AuthState>()(devtools(((set) => ({
                 accessToken: "",
                 isLoading: false,
                 isSuccess: false,
+                isError: false,
                 error: '',
             }));
 

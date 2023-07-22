@@ -1,7 +1,7 @@
 import { LoginAction } from "../components/login/LoginAction";
 
-const Login = () => {
+const LoginPage = () => {
 	return <LoginAction />;
 };
 
-export default Login;
+export default LoginPage;

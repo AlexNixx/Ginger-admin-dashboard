@@ -6,9 +6,7 @@ import logoCollapsed from "shared/assets/image/logo-collapsed.svg";
 
 import cls from "./Sidebar.module.scss";
 
-import { LanguageSwitcher } from "modules/session";
 import { SidebarMenu } from "./SidebarMenu";
-import { Logout } from "modules/auth";
 
 export const Sidebar = () => {
 	const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -31,9 +29,6 @@ export const Sidebar = () => {
 			/>
 
 			<SidebarMenu />
-
-			<Logout short={collapsed} className={cls.logout} />
-			{/* <LanguageSwitcher short={collapsed} />  */}
 		</Layout.Sider>
 	);
 };

@@ -1,11 +1,10 @@
-import { Col, Row, Spin, Alert, Space, Image } from "antd";
+import { Col, Row, Spin, Alert, Space, Image, message } from "antd";
 import { LoginForm, LoginFormValues } from "./LoginForm";
 
 import logo from "shared/assets/image/logo.svg";
 
 import { useAuthStore } from "modules/auth/models/useAuth";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { Loader } from "shared/ui/fullscreen-loader";
 
@@ -20,13 +19,14 @@ export const LoginAction = () => {
 	};
 
 	useEffect(() => {
-		if (isError) {
-			toast.error(error);
+		if (isError && error) {
+			message.error(error);
 		}
-	}, [isError]);
+	}, [isError, error]);
 
 	useEffect(() => {
 		if (isSuccess) {
+			message.success("Authorization succeeded");
 			navigate("/");
 		}
 	}, [isSuccess]);

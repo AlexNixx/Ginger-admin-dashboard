@@ -58,16 +58,6 @@ export const SidebarMenu = () => {
 			icon: <TeamOutlined />,
 			label: <Link to="/users">{t("users")}</Link>,
 		},
-		// {
-		// 	key: "7",
-		// 	icon: <LangIcon />,
-		// 	label: <LanguageSwitcher />,
-		// },
-		// {
-		// 	key: "8",
-		// 	icon: <RollbackOutlined />,
-		// 	label: <Logout />,
-		// },
 	];
 
 	const defaultSelectedKeys = menuItems.find(

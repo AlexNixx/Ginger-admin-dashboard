@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import type { MenuProps } from "antd";
 
 import { FC } from "react";
+import { LangIcon } from "./icon";
 
 interface LanguageSwitcherProps {
 	className?: string;
@@ -31,6 +32,7 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
 	return (
 		<Dropdown menu={{ items, onClick }} className={className}>
 			<a onClick={(e) => e.preventDefault()} href="">
+				<LangIcon />
 				{t("language")}
 			</a>
 		</Dropdown>
