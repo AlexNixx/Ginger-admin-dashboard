@@ -1,0 +1,1 @@
+export { CategotyPageAsync as CategoryPage } from "./page/Category.page.async"
