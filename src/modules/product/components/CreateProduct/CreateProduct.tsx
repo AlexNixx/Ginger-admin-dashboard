@@ -1,14 +1,13 @@
-import { Button, Modal } from "antd";
-import { useState } from "react";
-import { CreateProductForm, ProductFormValues } from "./CreateProductForm";
+import { Button, message } from "antd";
+import { ProductForm } from "../ProductForm/ProductForm";
 import { createProduct } from "modules/product/services/productServices";
 
-export const CreateProduct = () => {
-	const [open, setOpen] = useState<boolean>(false);
+import { useModal } from "modules/product/model/useModal";
+import { useProductStore } from "modules/product/model/useProduct";
 
-	const showModal = () => {
-		setOpen(true);
-	};
+export const CreateProduct = () => {
+	const { isModalOpen, openModal, closeModal } = useModal();
+	const { setIsDataUpdated } = useProductStore();
 
 	const onCreate = async (product: any) => {
 		const formData = new FormData();
@@ -22,16 +21,15 @@ export const CreateProduct = () => {
 		formData.append("deviceInfo", JSON.stringify(product.deviceInfo));
 		formData.append("photoUrl", product.photoUrl[0].originFileObj);
 
-		console.log(product);
+		try {
+			await createProduct(formData);
+			message.success("The product was successfully added");
+		} catch (error) {
+			console.log(error);
+		}
 
-		const response = await createProduct(formData);
-		console.log(response);
-
-		setOpen(false);
-	};
-
-	const handleCancel = () => {
-		setOpen(false);
+		setIsDataUpdated();
+		closeModal();
 	};
 
 	return (
@@ -39,16 +37,17 @@ export const CreateProduct = () => {
 			<Button
 				type="dashed"
 				size={"large"}
-				style={{ width: "100%" }}
-				onClick={showModal}
+				style={{ width: "100%", borderRadius: "0 0 5px 5px" }}
+				onClick={openModal}
 			>
 				Add new product
 			</Button>
 
-			<CreateProductForm
-				open={open}
+			<ProductForm
+				open={isModalOpen}
+				title="Create new Product"
 				onCreate={onCreate}
-				onCancel={handleCancel}
+				onCancel={closeModal}
 			/>
 		</>
 	);

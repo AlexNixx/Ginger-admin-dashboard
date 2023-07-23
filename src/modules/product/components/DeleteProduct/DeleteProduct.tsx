@@ -1,21 +1,24 @@
-import { Button, Popconfirm } from "antd";
 import { FC } from "react";
+
+import { Button, Popconfirm, message } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+
+import { useProductStore } from "modules/product/model/useProduct";
+
 import { deleteProduct } from "modules/product/services/productServices";
 
 interface DeleteProductProps {
 	productId: string;
-	setDataUpdated: (state: boolean) => void;
 }
 
-export const DeleteProduct: FC<DeleteProductProps> = ({
-	productId,
-	setDataUpdated,
-}) => {
+export const DeleteProduct: FC<DeleteProductProps> = ({ productId }) => {
+	const { setIsDataUpdated } = useProductStore();
+
 	const handleDeleteProduct = async () => {
 		try {
 			await deleteProduct(productId);
-			setDataUpdated(true);
+			message.success("The item was successfully removed");
+			setIsDataUpdated();
 		} catch (error) {
 			console.log(error);
 		}

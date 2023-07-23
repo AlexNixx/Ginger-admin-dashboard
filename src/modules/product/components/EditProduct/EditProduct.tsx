@@ -1,29 +1,27 @@
-import { Button } from "antd";
-import { FC, useEffect, useState } from "react";
+import { Button, message } from "antd";
+import { FC, memo, useEffect, useLayoutEffect, useMemo, useState } from "react";
 
 import { EditOutlined } from "@ant-design/icons";
 import {
 	getOneProduct,
 	updateProduct,
 } from "modules/product/services/productServices";
-import { CreateProductForm } from "../CreateProduct/CreateProductForm";
+import { ProductForm } from "../ProductForm/ProductForm";
 import { Product } from "modules/product/model/ProductTypes";
+import { useProductStore } from "modules/product/model/useProduct";
+import { useModal } from "modules/product/model/useModal";
 
 interface EditProductProps {
 	productId: string;
-	setDataUpdated: (state: boolean) => void;
 }
 
-export const EditProduct: FC<EditProductProps> = ({
-	productId,
-	setDataUpdated,
-}) => {
-	const [product, setProduct] = useState<Product>();
-	const [open, setOpen] = useState<boolean>(false);
+export const EditProduct: FC<EditProductProps> = ({ productId }) => {
+	const { setIsDataUpdated } = useProductStore();
+	const [product, setProduct] = useState<Product | null>();
+	const { isModalOpen, openModal, closeModal } = useModal();
 
 	const getProductData = async () => {
 		const productResonse = await getOneProduct(productId);
-		setOpen(true);
 		setProduct(productResonse.data);
 	};
 
@@ -44,31 +42,36 @@ export const EditProduct: FC<EditProductProps> = ({
 			formData.append("photoUrl", product.photoUrl[0].url);
 		}
 
-		await updateProduct(productId, formData);
+		try {
+			await updateProduct(productId, formData);
+			message.success("The item has been successfully edited");
+		} catch (error) {
+			console.log(error);
+		}
 
-		setDataUpdated(true);
-		setOpen(false);
+		setProduct(null);
+		closeModal();
+		setIsDataUpdated();
 	};
 
-	const handleCancel = () => {
-		setOpen(false);
-	};
-
-	const handleEditProduct = () => {
-		getProductData();
+	const handleEditClick = async () => {
+		await getProductData();
+		openModal();
 	};
 
 	return (
 		<>
-			<Button type="primary" onClick={handleEditProduct}>
+			<Button type="primary" onClick={handleEditClick}>
 				<EditOutlined />
 			</Button>
 
-			<CreateProductForm
-				open={open}
+			<ProductForm
+				open={isModalOpen}
+				title="Update Product"
 				onCreate={onCreate}
-				onCancel={handleCancel}
+				onCancel={closeModal}
 				productValue={product}
+				key={product?._id}
 			/>
 		</>
 	);

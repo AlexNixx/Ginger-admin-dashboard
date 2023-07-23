@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import {
 	Form,
 	Input,
@@ -7,79 +9,71 @@ import {
 	Switch,
 	Button,
 	Upload,
-	message,
 	Modal,
 } from "antd";
-
-import type { UploadProps } from "antd";
 
 import {
 	MinusCircleOutlined,
 	PlusOutlined,
 	UploadOutlined,
 } from "@ant-design/icons";
-import { FC } from "react";
-import { Product } from "modules/product/model/ProductTypes";
 
-interface Info {
-	title: string;
-	description: string;
-}
+import { useProductStore } from "modules/product/model/useProduct";
+import type { Product } from "modules/product/model/ProductTypes";
 
-export type ProductFormValues = {
-	title: string;
-	price: number;
-	category: string;
-	brand: string;
-	color: string;
-	inStock: boolean;
-	deviceInfo: Info[];
-	photoUrl: FileList;
-};
+import { normalizeFile } from "modules/product/utils/normalizeFile";
+import { uploadProps } from "./uploadProps";
 
-interface CreateProductFormProps {
+interface ProductFormProps {
 	open: boolean;
-	onCreate: (values: ProductFormValues) => void;
+	title: string;
+	onCreate: (values: any) => void;
 	onCancel: () => void;
-	productValue?: Product;
+	productValue?: Product | null;
 }
 
-export const CreateProductForm: FC<CreateProductFormProps> = ({
+export const ProductForm: FC<ProductFormProps> = ({
 	open,
+	title,
 	onCreate,
 	onCancel,
 	productValue,
 }) => {
+	const productStore = useProductStore();
+
 	const [form] = Form.useForm();
 
-	const normFile = (e: any) => {
-		if (Array.isArray(e)) {
-			return e;
-		}
-		return e?.fileList;
-	};
-
-	const uploadProps: UploadProps = {
-		beforeUpload: (file) => {
-			const isPNG = file.type === "image/png";
-			if (!isPNG) {
-				message.error(`${file.name} is not a png file`);
-			}
-			return isPNG || Upload.LIST_IGNORE;
-		},
+	const initialValues = {
+		title: productValue?.title,
+		price: productValue?.price,
+		category: productValue?.category._id,
+		brand: productValue?.brand._id,
+		color: productValue?.color._id,
+		deviceInfo: productValue?.deviceInfo,
+		photoUrl: productValue?.photoUrl
+			? [
+					{
+						uid: "-1",
+						name: "product-photo",
+						status: "done",
+						url: `${process.env.REACT_APP_SERVER_ENDPOINT}/${productValue.photoUrl}`,
+					},
+			  ]
+			: [],
+		inStoke: productValue?.inStock || true,
 	};
 
 	return (
 		<Modal
 			open={open}
-			title="Create a new collection"
-			okText="Create"
+			title={title}
+			okText="Submit"
 			cancelText="Cancel"
 			onCancel={onCancel}
 			onOk={() => {
 				form
 					.validateFields()
-					.then((values: ProductFormValues) => {
+					.then((values: any) => {
 						form.resetFields();
 						onCreate(values);
 					})
@@ -88,29 +82,7 @@ export const CreateProductForm: FC<CreateProductFormProps> = ({
 					});
 			}}
 		>
-			<Form
-				name="product"
-				form={form}
-				initialValues={{
-					title: productValue?.title,
-					price: productValue?.price,
-					category: productValue?.category._id,
-					brand: productValue?.brand._id,
-					color: productValue?.color._id,
-					deviceInfo: productValue?.deviceInfo,
-					photoUrl: productValue?.photoUrl
-						? [
-								{
-									uid: "-1",
-									name: "product-photo",
-									status: "done",
-									url: `${process.env.REACT_APP_SERVER_ENDPOINT}/${productValue.photoUrl}`,
-								},
-						  ]
-						: [],
-					inStoke: productValue?.inStock || true,
-				}}
-			>
+			<Form name="product" form={form} initialValues={initialValues}>
 				<Form.Item
 					label="Title"
 					name="title"
@@ -132,11 +104,11 @@ export const CreateProductForm: FC<CreateProductFormProps> = ({
 					rules={[{ required: true, message: "Please set category!" }]}
 				>
 					<Select placeholder="I'm Select category" allowClear>
-						<Select.Option value="64012f858a62a6e9894db1e1">
-							category 1
-						</Select.Option>
-						<Select.Option value="2">category 2</Select.Option>
-						<Select.Option value="3">category 3</Select.Option>
+						{productStore.categories.map((category) => (
+							<Select.Option value={category._id}>
+								{category.name}
+							</Select.Option>
+						))}
 					</Select>
 				</Form.Item>
 				<Form.Item
@@ -145,11 +117,9 @@ export const CreateProductForm: FC<CreateProductFormProps> = ({
 					rules={[{ required: true, message: "Please set brand!" }]}
 				>
 					<Select placeholder="I'm Select brand" allowClear>
-						<Select.Option value="640131468a62a6e9894db1ef">
-							Brand 1
-						</Select.Option>
-						<Select.Option value="2">Brand 2</Select.Option>
-						<Select.Option value="3">Brand 3</Select.Option>
+						{productStore.brands.map((brand) => (
+							<Select.Option value={brand._id}>{brand.name}</Select.Option>
+						))}
 					</Select>
 				</Form.Item>
 				<Form.Item
@@ -158,11 +128,9 @@ export const CreateProductForm: FC<CreateProductFormProps> = ({
 					rules={[{ required: true, message: "Please set color!" }]}
 				>
 					<Select placeholder="I'm Select color" allowClear>
-						<Select.Option value="640132348a62a6e9894db20e">
-							Color 1
-						</Select.Option>
-						<Select.Option value="2">Color 2</Select.Option>
-						<Select.Option value="3">Color 3</Select.Option>
+						{productStore.colors.map((color) => (
+							<Select.Option value={color._id}>{color.name}</Select.Option>
+						))}
 					</Select>
 				</Form.Item>
 				<Form.Item valuePropName="checked" label="In Stoke" name="inStoke">
@@ -195,7 +163,7 @@ export const CreateProductForm: FC<CreateProductFormProps> = ({
 										rules={[
 											{
 												required: true,
-												message: "Missing Characteristics desc",
+												message: "Missing characteristics description",
 											},
 										]}
 									>
@@ -221,7 +189,7 @@ export const CreateProductForm: FC<CreateProductFormProps> = ({
 					label="Product Image"
 					name="photoUrl"
 					valuePropName="fileList"
-					getValueFromEvent={normFile}
+					getValueFromEvent={normalizeFile}
 					rules={[{ required: true, message: "Please add product image!" }]}
 				>
 					<Upload {...uploadProps}>

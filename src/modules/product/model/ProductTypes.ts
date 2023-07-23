@@ -3,13 +3,17 @@ type Info = {
     description: string
 }
 
+export type Category = { _id: string; name: string }
+export type Brand = { _id: string; name: string }
+export type Color = { _id: string; name: string, rgb: string }
+
 export type Product = {
     _id: string
     title: string
     price: number
-    category: { _id: string; name: string }
-    brand: { _id: string; name: string }
-    color: { _id: string; name: string; rgb: string }
+    category: Category
+    brand: Brand
+    color: Color
     deviceInfo: Info[]
     inStock: boolean
     photoUrl: string
