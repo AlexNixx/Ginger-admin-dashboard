@@ -25,8 +25,8 @@ export const EditCategory: FC<EditCategoryProps> = ({ categoryId }) => {
 	const { isModalOpen, openModal, closeModal } = useModal();
 
 	const getCategoryData = async () => {
-		const categoryResonse = await getOneCategory(categoryId);
-		setCategory(categoryResonse.data);
+		const categoryResponse = await getOneCategory(categoryId);
+		setCategory(categoryResponse.data);
 	};
 
 	const onCreate = async (category: any) => {

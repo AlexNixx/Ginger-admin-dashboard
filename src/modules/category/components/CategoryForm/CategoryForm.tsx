@@ -58,7 +58,7 @@ export const CategoryForm: FC<CategoryFormProps> = ({
 					});
 			}}
 		>
-			<Form name="product" form={form} initialValues={initialValues}>
+			<Form name="category" form={form} initialValues={initialValues}>
 				<Form.Item
 					label="Title"
 					name="name"

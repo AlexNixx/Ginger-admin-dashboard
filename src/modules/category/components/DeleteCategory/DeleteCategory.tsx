@@ -11,13 +11,13 @@ interface DeleteCategoryProps {
 }
 
 export const DeleteCategory: FC<DeleteCategoryProps> = ({ categoryId }) => {
-	const categoryStore = useCategoryStore();
+	const { setIsDataUpdated } = useCategoryStore();
 
 	const handleDeleteCategory = async () => {
 		try {
 			await deleteCategory(categoryId);
 			message.success("The category was successfully removed");
-			categoryStore.setIsDataUpdated();
+			setIsDataUpdated();
 		} catch (error) {
 			console.log(error);
 		}

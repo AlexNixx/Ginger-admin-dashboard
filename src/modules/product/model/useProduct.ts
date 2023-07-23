@@ -1,43 +1,11 @@
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 
-import type { Brand, Category, Product, Color } from "./ProductTypes";
+import type { ProductState } from "./ProductTypes";
 
 import { getAllProduct, getBrands, getCategories, getColors } from "../services/productServices";
 
 import { convertToURLFormat } from "../utils/convertToUrlFormat";
-
-
-interface ProductState {
-    productsList: Product[]
-    currentPage: number
-    totalPages: number,
-    totalProducts: number,
-    productsLimit: number
-
-
-    categories: Category[]
-    brands: Brand[]
-    colors: Color[]
-
-    categoriesFilter: string[]
-    brandsFilter: string[]
-    slugFilter: string
-
-    isDataUpdated: boolean
-    isLoading: boolean
-
-    getProducts: () => Promise<void>
-    getCategories: () => Promise<void>
-    getBrands: () => Promise<void>
-    getColors: () => Promise<void>
-
-    setIsDataUpdated: () => void
-    setCurrentPage: (page: number) => void
-    setSlugFilter: (productName: string) => void
-    setBrandsFilter: (brands: string[]) => void
-    setCategoriesFilter: (categories: string[]) => void
-}
 
 export const useProductStore = create<ProductState>()(devtools(((set) => ({
     productsList: [],
@@ -116,7 +84,7 @@ export const useProductStore = create<ProductState>()(devtools(((set) => ({
             const response = await getBrands();
 
             set((state) => ({
-                brands: response.data,
+                brands: response.data.brands,
                 isLoading: false,
             }));
 

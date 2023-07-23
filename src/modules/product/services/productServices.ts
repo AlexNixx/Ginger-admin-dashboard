@@ -1,7 +1,7 @@
 import { $api } from "shared/api/api"
 import { AxiosResponse } from "axios"
 
-import type { ProductsResponse, FilterParams, Product, Category, Brand, Color } from "../model/ProductTypes";
+import type { ProductsResponse, FilterParams, Product, CategoryResponse, BrandResponse, Color } from "../model/ProductTypes";
 
 export const getAllProduct = async (params: FilterParams): Promise<AxiosResponse<ProductsResponse>> => {
     return $api.get("/product", { params });
@@ -11,18 +11,11 @@ export const getOneProduct = async (productId: string): Promise<AxiosResponse<Pr
     return $api.get(`/product/${productId}`,);
 }
 
-export type CategoryResponse = {
-    categories: Category[]
-    currentPage: number
-    totalPages: number,
-    totalCategories: number,
-}
-
 export const getCategories = async (): Promise<AxiosResponse<CategoryResponse>> => {
     return $api.get(`/category`,);
 }
 
-export const getBrands = async (): Promise<AxiosResponse<Brand[]>> => {
+export const getBrands = async (): Promise<AxiosResponse<BrandResponse>> => {
     return $api.get(`/brand`,);
 }
 

@@ -1,25 +1,9 @@
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 
-import type { Category } from "./CategoryTypes";
+import type { CategoryState } from "./CategoryTypes";
 
 import { getAllCategory } from "../services/categoryServices";
-
-interface CategoryState {
-    categoryList: Category[]
-    currentPage: number
-    totalPages: number,
-    totalCategories: number,
-    categoriesLimit: number
-
-    isDataUpdated: boolean
-    isLoading: boolean
-
-    getCategories: () => Promise<void>
-
-    setIsDataUpdated: () => void
-    setCurrentPage: (page: number) => void
-}
 
 export const useCategoryStore = create<CategoryState>()(devtools(((set) => ({
     categoryList: [],

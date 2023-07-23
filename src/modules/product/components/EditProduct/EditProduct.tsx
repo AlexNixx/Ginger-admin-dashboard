@@ -21,8 +21,8 @@ export const EditProduct: FC<EditProductProps> = ({ productId }) => {
 	const { isModalOpen, openModal, closeModal } = useModal();
 
 	const getProductData = async () => {
-		const productResonse = await getOneProduct(productId);
-		setProduct(productResonse.data);
+		const productResponse = await getOneProduct(productId);
+		setProduct(productResponse.data);
 	};
 
 	const onCreate = async (product: any) => {
