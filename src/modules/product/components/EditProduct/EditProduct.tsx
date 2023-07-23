@@ -1,5 +1,5 @@
 import { Button, message } from "antd";
-import { FC, memo, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { FC, useState } from "react";
 
 import { EditOutlined } from "@ant-design/icons";
 import {
@@ -9,7 +9,7 @@ import {
 import { ProductForm } from "../ProductForm/ProductForm";
 import { Product } from "modules/product/model/ProductTypes";
 import { useProductStore } from "modules/product/model/useProduct";
-import { useModal } from "modules/product/model/useModal";
+import { useModal } from "shared/hook/useModal";
 
 interface EditProductProps {
 	productId: string;

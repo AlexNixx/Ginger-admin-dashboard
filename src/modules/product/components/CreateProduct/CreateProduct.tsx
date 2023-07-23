@@ -2,7 +2,7 @@ import { Button, message } from "antd";
 import { ProductForm } from "../ProductForm/ProductForm";
 import { createProduct } from "modules/product/services/productServices";
 
-import { useModal } from "modules/product/model/useModal";
+import { useModal } from "shared/hook/useModal";
 import { useProductStore } from "modules/product/model/useProduct";
 
 export const CreateProduct = () => {

@@ -21,8 +21,8 @@ import {
 import { useProductStore } from "modules/product/model/useProduct";
 import type { Product } from "modules/product/model/ProductTypes";
 
-import { normalizeFile } from "modules/product/utils/normalizeFile";
-import { uploadProps } from "./uploadProps";
+import { normalizeFile } from "shared/utils/normalizeFile";
+import { uploadFileProps } from "shared/utils/uploadFileProps";
 
 interface ProductFormProps {
 	open: boolean;
@@ -192,7 +192,7 @@ export const ProductForm: FC<ProductFormProps> = ({
 					getValueFromEvent={normalizeFile}
 					rules={[{ required: true, message: "Please add product image!" }]}
 				>
-					<Upload {...uploadProps}>
+					<Upload {...uploadFileProps}>
 						<Button icon={<UploadOutlined />}>Click to upload</Button>
 					</Upload>
 				</Form.Item>

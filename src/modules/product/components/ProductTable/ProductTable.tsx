@@ -89,6 +89,12 @@ export const ProductTable = () => {
 			},
 		},
 		{
+			title: "Color",
+			dataIndex: ["color", "name"],
+			key: "color",
+			width: 120,
+		},
+		{
 			title: "Price",
 			dataIndex: "price",
 			key: "price",

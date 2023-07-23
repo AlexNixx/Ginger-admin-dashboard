@@ -1,4 +1,4 @@
-import { Col, Row, Space } from "antd";
+import { Col, Row } from "antd";
 import { ProductTable } from "../components/ProductTable/ProductTable";
 import { CreateProduct } from "../components/CreateProduct/CreateProduct";
 

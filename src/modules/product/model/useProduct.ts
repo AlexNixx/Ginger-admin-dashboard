@@ -1,6 +1,5 @@
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
-import { AxiosError } from "axios";
 
 import type { Brand, Category, Product, Color } from "./ProductTypes";
 
@@ -132,7 +131,7 @@ export const useProductStore = create<ProductState>()(devtools(((set) => ({
             const response = await getCategories();
 
             set((state) => ({
-                categories: response.data,
+                categories: response.data.categories,
                 isLoading: false,
             }));
 

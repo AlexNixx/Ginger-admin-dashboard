@@ -11,7 +11,14 @@ export const getOneProduct = async (productId: string): Promise<AxiosResponse<Pr
     return $api.get(`/product/${productId}`,);
 }
 
-export const getCategories = async (): Promise<AxiosResponse<Category[]>> => {
+export type CategoryResponse = {
+    categories: Category[]
+    currentPage: number
+    totalPages: number,
+    totalCategories: number,
+}
+
+export const getCategories = async (): Promise<AxiosResponse<CategoryResponse>> => {
     return $api.get(`/category`,);
 }
 
