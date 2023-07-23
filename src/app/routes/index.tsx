@@ -5,6 +5,7 @@ import { Test } from "pages/Test";
 
 import { ProductPage } from "modules/product";
 import { CategoryPage } from "modules/category";
+import { BrandPage } from "modules/brand";
 
 import { LoginPage, GuardRoute } from "modules/auth";
 
@@ -17,7 +18,7 @@ export const Routing = () => {
 					<Route path={"/"} element={<Test />} />
 					<Route path={"/products"} element={<ProductPage />} />
 					<Route path={"/categories"} element={<CategoryPage />} />
-					<Route path={"/brands"} element={<Test />} />
+					<Route path={"/brands"} element={<BrandPage />} />
 					<Route path={"/colors"} element={<Test />} />
 					<Route path={"/users"} element={<Test />} />
 					<Route path={"/orders"} element={<Test />} />
