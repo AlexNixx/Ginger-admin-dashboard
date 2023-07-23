@@ -1,6 +1,6 @@
 import { message, Upload, type UploadProps } from "antd";
 
-export const uploadProps: UploadProps = {
+export const uploadFileProps: UploadProps = {
     beforeUpload: (file) => {
         const isPNG = file.type === "image/png";
         if (!isPNG) {
