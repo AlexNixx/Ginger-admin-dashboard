@@ -1,0 +1,1 @@
+export { ColorPageAsync as ColorPage } from "./page/Color.page.async"

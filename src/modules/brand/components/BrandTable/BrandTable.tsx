@@ -8,7 +8,7 @@ import type { Brand } from "modules/brand/model/BrandTypes";
 
 import { useBrandStore } from "modules/brand/model/useBrand";
 
-import { EditBrand } from "../EditCategory/EditBrand";
+import { EditBrand } from "../EditBrand/EditBrand";
 import { DeleteBrand } from "../DeleteBrand/DeleteBrand";
 
 export const BrandTable = () => {
