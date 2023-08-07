@@ -9,6 +9,7 @@ import { BrandPage } from "modules/brand";
 
 import { LoginPage, GuardRoute } from "modules/auth";
 import { ColorPage } from "modules/color";
+import { OrderPage } from "modules/orders";
 
 export const Routing = () => {
 	return (
@@ -21,8 +22,8 @@ export const Routing = () => {
 					<Route path={"/categories"} element={<CategoryPage />} />
 					<Route path={"/brands"} element={<BrandPage />} />
 					<Route path={"/colors"} element={<ColorPage />} />
+					<Route path={"/orders"} element={<OrderPage />} />
 					<Route path={"/users"} element={<Test />} />
-					<Route path={"/orders"} element={<Test />} />
 				</Route>
 			</Route>
 		</Routes>
