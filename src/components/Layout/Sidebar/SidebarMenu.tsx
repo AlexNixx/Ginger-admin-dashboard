@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "modules/session";
 import { LangIcon } from "modules/session/component/language-switcher/icon";
 import { Logout } from "modules/auth";
+import { Key, useEffect, useState } from "react";
 
 export type MenuItem = Required<MenuProps>["items"][number] & {
 	label: JSX.Element;

@@ -7,6 +7,7 @@ import logoCollapsed from "shared/assets/image/logo-collapsed.svg";
 import cls from "./Sidebar.module.scss";
 
 import { SidebarMenu } from "./SidebarMenu";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
 	const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -19,14 +20,16 @@ export const Sidebar = () => {
 			theme="dark"
 			className={cls.sidebar}
 		>
-			<Image
-				src={collapsed ? logoCollapsed : logo}
-				alt="logo"
-				height={"3rem"}
-				width={"100%"}
-				className={cls.logo}
-				preview={false}
-			/>
+			<Link to={"/"}>
+				<Image
+					src={collapsed ? logoCollapsed : logo}
+					alt="logo"
+					height={"3rem"}
+					width={"100%"}
+					className={cls.logo}
+					preview={false}
+				/>
+			</Link>
 
 			<SidebarMenu />
 		</Layout.Sider>
