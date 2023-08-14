@@ -8,16 +8,12 @@ import {
 	AppleOutlined,
 	TeamOutlined,
 	ShoppingCartOutlined,
-	RollbackOutlined,
+	AreaChartOutlined,
 } from "@ant-design/icons";
 
 import { Link, useLocation } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "modules/session";
-import { LangIcon } from "modules/session/component/language-switcher/icon";
-import { Logout } from "modules/auth";
-import { Key, useEffect, useState } from "react";
 
 export type MenuItem = Required<MenuProps>["items"][number] & {
 	label: JSX.Element;
@@ -31,31 +27,36 @@ export const SidebarMenu = () => {
 	const menuItems: MenuItem[] = [
 		{
 			key: "1",
+			icon: <AreaChartOutlined />,
+			label: <Link to="/">{t("dashboard")}</Link>,
+		},
+		{
+			key: "2",
 			icon: <LaptopOutlined />,
 			label: <Link to="/products">{t("products")}</Link>,
 		},
 		{
-			key: "2",
+			key: "3",
 			icon: <AppstoreOutlined />,
 			label: <Link to="/categories">{t("categories")}</Link>,
 		},
 		{
-			key: "3",
+			key: "4",
 			icon: <AppleOutlined />,
 			label: <Link to="/brands">{t("brands")}</Link>,
 		},
 		{
-			key: "4",
+			key: "5",
 			icon: <FormatPainterOutlined />,
 			label: <Link to="/colors">{t("colors")}</Link>,
 		},
 		{
-			key: "5",
+			key: "6",
 			icon: <ShoppingCartOutlined />,
 			label: <Link to="/orders">{t("orders")}</Link>,
 		},
 		{
-			key: "6",
+			key: "7",
 			icon: <TeamOutlined />,
 			label: <Link to="/users">{t("users")}</Link>,
 		},

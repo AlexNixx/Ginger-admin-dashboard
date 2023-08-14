@@ -20,16 +20,14 @@ export const Sidebar = () => {
 			theme="dark"
 			className={cls.sidebar}
 		>
-			<Link to={"/"}>
-				<Image
-					src={collapsed ? logoCollapsed : logo}
-					alt="logo"
-					height={"3rem"}
-					width={"100%"}
-					className={cls.logo}
-					preview={false}
-				/>
-			</Link>
+			<Image
+				src={collapsed ? logoCollapsed : logo}
+				alt="logo"
+				height={"3rem"}
+				width={"100%"}
+				className={cls.logo}
+				preview={false}
+			/>
 
 			<SidebarMenu />
 		</Layout.Sider>
